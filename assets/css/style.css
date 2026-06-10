@@ -60,6 +60,8 @@
   --onyx: hsl(240, 1%, 17%);
   --eerie-black-1: hsl(240, 2%, 13%);
   --eerie-black-2: hsl(240, 2%, 12%);
+  /* dropdown hover surface — promoted so light mode can override */
+  --select-hover-bg: hsl(240, 2%, 20%);
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
@@ -152,6 +154,7 @@
   --onyx: hsl(0, 0%, 88%);
   --eerie-black-1: hsl(0, 0%, 91%);
   --eerie-black-2: hsl(0, 0%, 93%);
+  --select-hover-bg: hsl(0, 0%, 83%);
   --smoky-black: hsl(0, 0%, 96%);
   --white-1: hsl(0, 0%, 15%);
   --white-2: hsl(0, 0%, 20%);
@@ -1004,7 +1007,7 @@ main {
   border-radius: 8px;
 }
 
-.select-item button:hover { --eerie-black-2: hsl(240, 2%, 20%); }
+.select-item button:hover { background: var(--select-hover-bg); }
 
 .project-list {
   display: grid;
