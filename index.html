@@ -23,6 +23,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      if (theme === 'light') document.documentElement.dataset.theme = 'light';
+    })();
+  </script>
 </head>
 
 <body>
@@ -192,6 +200,12 @@
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="theme-btn" data-theme-btn aria-label="Toggle light/dark theme">
+              <ion-icon name="sunny-outline"></ion-icon>
+            </button>
           </li>
 
         </ul>
