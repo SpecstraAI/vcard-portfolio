@@ -142,19 +142,11 @@ const themeBtn = document.querySelector("[data-theme-btn]");
 const applyTheme = function (theme) {
   if (theme === 'light') {
     document.documentElement.dataset.theme = 'light';
-    themeBtn.querySelector('ion-icon').setAttribute('name', 'moon-outline');
   } else {
     delete document.documentElement.dataset.theme;
-    themeBtn.querySelector('ion-icon').setAttribute('name', 'sunny-outline');
   }
   localStorage.setItem('theme', theme);
 };
-
-// set initial icon to reflect the current theme (set by inline <head> script)
-(function () {
-  var current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-  themeBtn.querySelector('ion-icon').setAttribute('name', current === 'light' ? 'moon-outline' : 'sunny-outline');
-})();
 
 themeBtn.addEventListener('click', function () {
   var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
