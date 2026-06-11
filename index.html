@@ -5,7 +5,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vCard - Personal Portfolio</title>
+  <title>Alex Morgan — UI/UX Designer | Portfolio</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
+  <meta name="author" content="Alex Morgan">
+  <link rel="canonical" href="https://alex-morgan.example.com/">
+
+  <!-- Theme color (dark / light) -->
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alex-morgan.example.com/">
+  <meta property="og:title" content="Alex Morgan — UI/UX Designer | Portfolio">
+  <meta property="og:description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
+  <meta property="og:image" content="https://alex-morgan.example.com/assets/images/my-avatar.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alex Morgan — UI/UX Designer | Portfolio">
+  <meta name="twitter:description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
+  <meta name="twitter:image" content="https://alex-morgan.example.com/assets/images/my-avatar.png">
 
   <!--
     - favicon
@@ -30,6 +52,26 @@
       var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
       if (theme === 'light') document.documentElement.dataset.theme = 'light';
     })();
+  </script>
+
+  <!-- JSON-LD Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alex Morgan",
+    "jobTitle": "UI/UX Designer",
+    "email": "alex.morgan@example.com",
+    "telephone": "+15558675309",
+    "url": "https://alex-morgan.example.com/",
+    "image": "https://alex-morgan.example.com/assets/images/my-avatar.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Austin",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    }
+  }
   </script>
 </head>
 
