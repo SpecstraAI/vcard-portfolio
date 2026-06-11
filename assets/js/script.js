@@ -26,12 +26,46 @@ const overlay = document.querySelector("[data-overlay]");
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
+const modalSection = modalContainer.querySelector(".testimonials-modal");
 
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
+let lastFocusedEl = null;
+
+const getFocusable = function () {
+  return modalSection.querySelectorAll(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  );
+};
+
+const trapFocus = function (e) {
+  if (e.key === "Escape") { closeModal(); return; }
+  if (e.key !== "Tab") return;
+  const focusable = getFocusable();
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+};
+
+const openModal = function () {
+  lastFocusedEl = document.activeElement;
+  modalContainer.classList.add("active");
+  overlay.classList.add("active");
+  document.addEventListener("keydown", trapFocus);
+  modalCloseBtn.focus();
+};
+
+const closeModal = function () {
+  modalContainer.classList.remove("active");
+  overlay.classList.remove("active");
+  document.removeEventListener("keydown", trapFocus);
+  if (lastFocusedEl) lastFocusedEl.focus();
+};
 
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
@@ -43,15 +77,15 @@ for (let i = 0; i < testimonialsItem.length; i++) {
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
 
-    testimonialsModalFunc();
+    openModal();
 
   });
 
 }
 
 // add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+modalCloseBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
 
 
 
@@ -175,10 +209,12 @@ for (let i = 0; i < navigationLinks.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
         navigationLinks[i].classList.add("active");
+        navigationLinks[i].setAttribute("aria-current", "page");
         window.scrollTo(0, 0);
       } else {
         pages[i].classList.remove("active");
         navigationLinks[i].classList.remove("active");
+        navigationLinks[i].removeAttribute("aria-current");
       }
     }
 
