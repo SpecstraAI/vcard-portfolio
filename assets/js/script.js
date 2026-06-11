@@ -159,20 +159,38 @@ themeBtn.addEventListener('click', function () {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// activate a page by name and sync nav link state
+const activatePage = function (pageName) {
+  for (let i = 0; i < pages.length; i++) {
+    if (pageName === pages[i].dataset.page) {
+      pages[i].classList.add("active");
+      navigationLinks[i].classList.add("active");
+      window.scrollTo(0, 0);
+    } else {
+      pages[i].classList.remove("active");
+      navigationLinks[i].classList.remove("active");
+    }
+  }
+};
+
+// add event to all nav link — also update URL hash
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
-
+    var pageName = this.innerHTML.toLowerCase();
+    history.replaceState(null, '', '#' + pageName);
+    activatePage(pageName);
   });
 }
+
+// activate the page indicated by the URL hash, falling back to the first page
+const handleHash = function () {
+  var hash = window.location.hash.slice(1);
+  var valid = false;
+  for (var i = 0; i < pages.length; i++) {
+    if (pages[i].dataset.page === hash) { valid = true; break; }
+  }
+  activatePage(valid ? hash : pages[0].dataset.page);
+};
+
+window.addEventListener('hashchange', handleHash);
+handleHash();
