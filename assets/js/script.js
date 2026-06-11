@@ -52,8 +52,9 @@ const trapFocus = function (e) {
   }
 };
 
-const openModal = function () {
-  lastFocusedEl = document.activeElement;
+// triggerEl: the card element that opened the modal, used to restore focus on close
+const openModal = function (triggerEl) {
+  lastFocusedEl = triggerEl || document.activeElement;
   modalContainer.classList.add("active");
   overlay.classList.add("active");
   document.addEventListener("keydown", trapFocus);
@@ -67,18 +68,29 @@ const closeModal = function () {
   if (lastFocusedEl) lastFocusedEl.focus();
 };
 
-// add click event to all modal items
+// populate modal content from the activated testimonial card
+const populateModal = function (card) {
+  modalImg.src = card.querySelector("[data-testimonials-avatar]").src;
+  modalImg.alt = card.querySelector("[data-testimonials-avatar]").alt;
+  modalTitle.innerHTML = card.querySelector("[data-testimonials-title]").innerHTML;
+  modalText.innerHTML = card.querySelector("[data-testimonials-text]").innerHTML;
+};
+
+// add click and keyboard events to all testimonial cards
 for (let i = 0; i < testimonialsItem.length; i++) {
 
   testimonialsItem[i].addEventListener("click", function () {
+    populateModal(this);
+    openModal(this);
+  });
 
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    openModal();
-
+  // Enter or Space activates the card for keyboard users (role="button" on a div)
+  testimonialsItem[i].addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      populateModal(this);
+      openModal(this);
+    }
   });
 
 }
