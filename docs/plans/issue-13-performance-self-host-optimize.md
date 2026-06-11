@@ -109,12 +109,12 @@ these topics, so there is nothing to retire.)
 | `index.html` (`index.html:1215–1216`) | Delete both Ionicons `<script>` tags. |
 | `index.html` (all 32 `<img>` sites) | Add `width`/`height`; wrap raster project/blog images in `<picture>` with a WebP `<source>`. |
 | **`assets/js/script.js` (L142–157)** | **Remove** the three `themeBtn.querySelector('ion-icon').setAttribute('name', …)` calls (L145, L148, L156) and the initial-icon IIFE (L153–157). Keep the `dataset.theme` / `localStorage` logic and the click listener. See Step 1 contract. |
-| `assets/css/style.css` (L195, 272, 773, 1078, 1286, 1331, 1472, 1653) | Re-target the 8 `ion-icon` CSS rules to the new `svg.icon`; add the 3 theme-icon visibility rules. |
+| `assets/css/style.css` (L195, 272, 773, 1078, 1286, 1331, 1472, 1653) | Re-target the 8 `ion-icon` CSS rules to the new `svg.icon`; replace the 3 `--ionicon-stroke-width` rules (L272/773/1078) with the `--icon-stroke-width` strategy in Step 1d; add the base `svg.icon [stroke]` weight rule and the 3 theme-icon visibility rules. |
 | `assets/images/*.webp` (new) | Committed WebP variants of project/blog rasters. |
 | `website-demo-image/Thumbs.db` | **Delete** (tracked). |
 | `index.txt` | **Delete** (tracked). |
 | `.gitignore` (new) | Ignore `Thumbs.db`, `.DS_Store`, `desktop.ini`. |
-| `404.html` (new, **required**) | Branded not-found page reusing `style.css`. |
+| `404.html` (new, **required**) | Branded not-found page reusing `style.css` via **project-absolute paths** (`/vcard-portfolio/assets/css/style.css`, home link `/vcard-portfolio/`); see Step 4. |
 | `.nojekyll` (new, recommended) | Disable Jekyll processing on Pages. |
 
 > No documentation files appear in this table — see the *Documentation* note in
@@ -146,10 +146,14 @@ also be inlined into the theme button.
 | `logo-twitter` | 1 | brand | |
 
 `--ionicon-stroke-width` is customized in **3** CSS rules: 35px for `.icon-box`
-(`style.css:272`), 50px for `.modal-close-btn` (`style.css:773`) and
-`.project-item-icon-box` (`style.css:1078`). This only affects the *outline*
-glyphs and **must** be preserved during inline-SVG migration (translated to
-`stroke-width` on the paths).
+(`style.css:272`, the **sidebar** contact icons — mail/phone/location/calendar),
+50px for `.modal-close-btn` (`style.css:773`, the testimonial **modal-close ×**
+icon) and `.project-item-icon-box` (`style.css:1078`, the **project-overlay eye**
+icon). This only affects the *outline* glyphs and **must** be preserved during
+inline-SVG migration via the single `--icon-stroke-width` CSS strategy specified in
+[Step 1d](#step-1--replace-ionicons-with-inline-svg-touches-indexhtml-stylecss-scriptjs)
+— **not** by hardcoded child `stroke-width` attributes (those are stripped in 1a,
+because an explicit child attribute cannot be overridden from an ancestor rule).
 
 ## Implementation Steps
 
@@ -161,7 +165,17 @@ glyphs and **must** be preserved during inline-SVG migration (translated to
 **1a. Obtain the 15 glyph SVGs.** For each unique glyph in the inventory (including
 `moon-outline`), copy the exact SVG source from the pinned Ionicons 5.5.2 package
 (`https://unpkg.com/ionicons@5.5.2/dist/svg/<name>.svg`). Copy the inner
-`<path>`/`<rect>` markup verbatim so glyphs render pixel-identically.
+`<path>`/`<rect>`/`<line>`/`<circle>` markup verbatim — **with one required
+modification**: the *outline* glyphs ship with a hardcoded `stroke-width="32"`
+presentation attribute on each stroked child element. **Strip that
+`stroke-width="32"` attribute from every stroked child** so the stroke weight is
+controlled entirely from CSS (Step 1d). Leave every other attribute (`d`, `cx`,
+`cy`, `x1`, geometry, `fill`/`stroke`) untouched, so glyphs render
+pixel-identically once CSS supplies the weight. (Why strip it: an explicit
+`stroke-width` attribute on the child wins over any `stroke-width` rule applied to
+an *ancestor* selector such as `.icon-box svg.icon`, so leaving it in place would
+silently discard the 35px/50px weight customizations — the exact contradiction
+this plan resolves.)
 
 **1b. Replace the 23 non-theme `<ion-icon>` tags** with:
 ```html
@@ -169,9 +183,10 @@ glyphs and **must** be preserved during inline-SVG migration (translated to
   <!-- path(s) from <name>.svg -->
 </svg>
 ```
-- Outline glyphs use `fill="none" stroke="currentColor"` with `stroke-width` on
-  the paths; filled/brand glyphs use `fill="currentColor"`. Keep the fill/stroke
-  model the source uses so `color` inheritance still tints them.
+- Outline glyphs use `fill="none" stroke="currentColor"` and carry **no**
+  `stroke-width` attribute on their children (it was stripped in 1a — the weight is
+  supplied by CSS in 1d); filled/brand glyphs use `fill="currentColor"`. Keep the
+  fill/stroke model the source uses so `color` inheritance still tints them.
 - `aria-hidden="true"` because every icon here is decorative or paired with
   visible text. (If the accessibility pass, PR #17, prefers labeled icons,
   coordinate — do not double-label.)
@@ -227,12 +242,28 @@ that can return `null`), so it is behavior-safe.
 **1d. Migrate the 8 `ion-icon` CSS rules** in `assets/css/style.css`:
 - `L195` `img, ion-icon, a, button, time, span { display: block; }` → add
   `svg.icon` to the selector list (or change `ion-icon` → `svg.icon`).
-- `L272` `.icon-box ion-icon { --ionicon-stroke-width: 35px; }` →
-  `.icon-box svg.icon { stroke-width: 35px; }` (Ionicons strokes use the 512
-  viewBox; verify the value visually and adjust to match).
-- `L773` `.modal-close-btn ion-icon { --ionicon-stroke-width: 50px; }` →
-  `.modal-close-btn svg.icon { stroke-width: 50px; }`.
-- `L1078` `.project-item-icon-box ion-icon { … 50px; }` → likewise.
+- **Stroke-width — the single, coherent strategy (replaces the three
+  `--ionicon-stroke-width` rules).** Because the hardcoded child `stroke-width="32"`
+  attributes were stripped in 1a, drive the weight from CSS by targeting the
+  *stroked child elements* (not the parent `<svg>`) via a custom property, and set
+  that property in the existing context selectors:
+  ```css
+  /* Base rule — applies the default Ionicons weight (32) to every stroked child. */
+  svg.icon [stroke] { stroke-width: var(--icon-stroke-width, 32); }
+
+  /* Context overrides — formerly the three --ionicon-stroke-width rules.
+     Values are in the 0 0 512 512 viewBox user units, matching the original
+     numeric weights (35 and 50). Custom properties inherit, so setting the var
+     on svg.icon flows down to the [stroke] children matched by the base rule. */
+  .icon-box svg.icon              { --icon-stroke-width: 35; }  /* was L272: 35px, sidebar contact icons */
+  .modal-close-btn svg.icon       { --icon-stroke-width: 50; }  /* was L773: 50px, modal-close × icon   */
+  .project-item-icon-box svg.icon { --icon-stroke-width: 50; }  /* was L1078: 50px, project-overlay eye */
+  ```
+  Do **not** put `stroke-width` on the parent `svg.icon` itself and do **not**
+  re-add a child `stroke-width` attribute — the `svg.icon [stroke]` rule plus the
+  inherited `--icon-stroke-width` var is the one mechanism that actually overrides
+  the (now-removed) default. Use unitless values (`32`/`35`/`50`), matching the
+  original Ionicons weights, since SVG stroke widths are in viewBox user units.
 - `L1286` `.form-btn ion-icon { font-size: 16px; }` and `L1331`
   `.cv-btn ion-icon { font-size: 16px; }` and `L1653` `.form-btn ion-icon
   { font-size: 18px; }` — `font-size` sized the Ionicons glyph; for SVG set
@@ -260,6 +291,20 @@ that can return `null`), so it is behavior-safe.
 - **Navigation still works:** click each navbar tab (About/Resume/Portfolio/Blog/
   Contact) and confirm the section switches — this proves the listeners at
   `script.js:171–185` registered, i.e. nothing earlier in the file threw.
+- **Stroke-weight check (proves the 1d strategy preserved the customized weights —
+  not just that icons appear):** confirm the three weight-customized icon groups
+  render at their intended weight, not the default 32:
+  - **Sidebar** `.icon-box` contact icons (mail / phone / location / calendar) →
+    weight **35**.
+  - **Modal-close ×** icon (`.modal-close-btn`; open a testimonial card) → weight **50**.
+  - **Project-overlay eye** icon (`.project-item-icon-box`; hover a portfolio card) →
+    weight **50**.
+  For each, inspect a stroked child element in DevTools and confirm its *computed*
+  `stroke-width` is `35`/`50` (i.e. the `svg.icon [stroke]` rule plus the inherited
+  `--icon-stroke-width` resolved), and that these groups read visibly bolder than
+  the default-weight outline glyphs elsewhere. If any reverts to 32, a child
+  `stroke-width="32"` attribute was left in (re-do 1a) or the var was set on the
+  wrong selector.
 
 **Lower-effort alternative (self-host, if inline SVG is rejected):** Vendor the
 Ionicons dist into `assets/vendor/ionicons/` and repoint the two `<script>` `src`
@@ -355,9 +400,27 @@ demonstrably targeting Pages, so:
 
 1. **Add `404.html` at repo root (required).** Pages reports `custom_404: false`,
    so an unknown path currently shows GitHub's generic 404. Add a minimal branded
-   page that links `./assets/css/style.css` and offers a link back to `/`. Reuse
-   the existing CSS color variables for a consistent look. Because the site is a
-   single-page app, the 404 only fires for genuinely missing paths.
+   page that reuses the existing CSS color variables for a consistent look.
+
+   **Path contract — use project-absolute paths, NOT relative ones (single chosen
+   strategy; do not also add a `<base href>`).** This is a *project* Pages site
+   served from `https://specstraai.github.io/vcard-portfolio/`, so the site root is
+   **`/vcard-portfolio/`**, not `/`. GitHub serves this same `404.html` for a
+   missing URL at *any* depth, and the browser resolves relative hrefs against the
+   **requested (missing)** URL — so on a nested miss like
+   `/vcard-portfolio/projects/does-not-exist`, a relative `./assets/css/style.css`
+   would resolve to `/vcard-portfolio/projects/assets/css/style.css` (404 → the page
+   renders **unstyled**), and a home link to `/` would leave the project entirely
+   for the org root `https://specstraai.github.io/`. Therefore use absolute paths
+   rooted at the project base:
+   - **Stylesheet** (and every other asset the page references): set
+     `href="/vcard-portfolio/assets/css/style.css"` — leading-slash, project-rooted,
+     so it resolves identically regardless of the missing URL's depth.
+   - **Home link:** `href="/vcard-portfolio/"` (the portfolio root) — **never** `/`,
+     which is the org root.
+
+   Because the site is a single-page app, the 404 only fires for genuinely missing
+   paths.
 2. **Add `.nojekyll` (empty file, recommended).** The repo deploys via the legacy
    branch source, which runs the files through Jekyll by default. The repo has no
    `_`-prefixed files today so nothing is currently stripped, but `.nojekyll` is
@@ -373,11 +436,27 @@ demonstrably targeting Pages, so:
    workflow file — committing `404.html` and `.nojekyll` to `main` is sufficient
    for them to take effect on the next push.
 
-**Verification for Step 4:** After merge to `main`, confirm the next Pages build
-succeeds (`gh api repos/SpecstraAI/vcard-portfolio/pages` → `status: "built"`),
-that `https://specstraai.github.io/vcard-portfolio/<nonexistent-path>` serves the
-new `404.html`, and that `gh api …/pages --jq .custom_404` flips to `true`. No
-repo Settings change is needed because the Source remains "Deploy from a branch".
+**Verification for Step 4:** After merge to `main`:
+1. Confirm the next Pages build succeeds
+   (`gh api repos/SpecstraAI/vcard-portfolio/pages` → `status: "built"`) and that
+   `gh api …/pages --jq .custom_404` flips to `true`.
+2. **Single-segment missing URL:** request
+   `https://specstraai.github.io/vcard-portfolio/no-such-page` and confirm the
+   branded `404.html` renders (the custom page body, not GitHub's generic 404).
+3. **Nested missing URL — the path-bug catch (mandatory):** request a *deeper*
+   missing URL, `https://specstraai.github.io/vcard-portfolio/projects/does-not-exist`,
+   and confirm **both**:
+   - **CSS still loads:** DevTools Network shows
+     `/vcard-portfolio/assets/css/style.css` returning **200** and the page is
+     **styled** (not bare HTML). A relative `./assets/css/style.css` would instead
+     request `/vcard-portfolio/projects/assets/css/style.css` and 404 here.
+   - **Home link returns to the portfolio root:** the home link's resolved `href` is
+     `https://specstraai.github.io/vcard-portfolio/`, and clicking it lands on the
+     portfolio — **not** the org root `https://specstraai.github.io/`.
+   This nested case is the one that fails if relative paths slipped in; a
+   single-segment check (step 2) alone would pass even with the broken paths.
+
+No repo Settings change is needed because the Source remains "Deploy from a branch".
 
 ## Validation Strategy
 
@@ -407,7 +486,7 @@ checklist plus performance-specific checks:
 | Risk | Likelihood | Mitigation |
 | --- | --- | --- |
 | **Removing `<ion-icon>` breaks the theme toggle and silently kills navigation** because `script.js:145/148/156` query the (now-absent) node and throw | **High if Step 1c is skipped** | Follow the Step 1c contract: inline both sun/moon SVGs, drive visibility from CSS, and delete the three `setAttribute` calls + the IIFE so `script.js` no longer references `ion-icon`. Verify via the "no console errors" + "navigation still works" checks. |
-| Inline-SVG glyphs render subtly differently (stroke width, sizing) than Ionicons | Medium | Copy SVG source verbatim from the pinned 5.5.2 package; migrate the 3 `--ionicon-stroke-width` rules to `stroke-width`; visual-diff every section. Fall back to the self-host alternative if fidelity is hard to match. |
+| Inline-SVG glyphs render subtly differently (stroke width, sizing) than Ionicons | Medium | Copy SVG source verbatim from the pinned 5.5.2 package (stripping only the child `stroke-width="32"`); migrate the 3 `--ionicon-stroke-width` rules to the `--icon-stroke-width` strategy in 1d (`svg.icon [stroke] { stroke-width: var(--icon-stroke-width, 32); }`); run the Step 1 stroke-weight check + visual-diff every section. Fall back to the self-host alternative if fidelity is hard to match. |
 | Missed an `<ion-icon>` or a CSS/JS `ion-icon` reference | Medium | Grep gate before commit: `grep -rn 'ion-icon' index.html assets/` must return zero hits. |
 | Wrong/omitted `width`/`height` → distorted images or residual CLS | Medium | Use **intrinsic** pixel dimensions (from the converter), not rendered size; CSS keeps controlling display size. Verify CLS in Lighthouse. |
 | WebP conversion tooling unavailable to implementer | Low | Documented: install libwebp/`cwebp` or use Squoosh; conversion is a one-time local step, output committed. |
@@ -424,9 +503,14 @@ checklist plus performance-specific checks:
 - [ ] **No console errors on load**; the theme toggle switches both directions with
       the correct sun/moon SVG shown and persists across reloads; **all five navbar
       tabs still switch sections** (proving `script.js` listeners registered).
-- [ ] The 3 `--ionicon-stroke-width` customizations are preserved via `stroke-width`
-      on the new `svg.icon` rules; the 3 `font-size`-based icon sizings are
-      preserved via explicit SVG `width`/`height`.
+- [ ] The 3 `--ionicon-stroke-width` customizations are preserved via the single
+      `--icon-stroke-width` strategy (Step 1d): child `stroke-width="32"` stripped,
+      `svg.icon [stroke] { stroke-width: var(--icon-stroke-width, 32); }` plus
+      `--icon-stroke-width: 35/50` on the context selectors — verified by the
+      named-icon check: **sidebar `.icon-box` icons compute `stroke-width: 35`**, and
+      the **modal-close ×** and **project-overlay eye** icons compute
+      `stroke-width: 50`. The 3 `font-size`-based icon sizings are preserved via
+      explicit SVG `width`/`height`.
 - [ ] All project/blog raster images are served as WebP (with original-format
       `<picture>` fallback, unless a hard cutover was chosen); committed `.webp`
       files exist.
@@ -435,8 +519,12 @@ checklist plus performance-specific checks:
 - [ ] Cold-load transfer size and request count are measurably lower than `main`.
 - [ ] `website-demo-image/Thumbs.db` and `index.txt` are deleted; `.gitignore`
       prevents OS-junk regression; `README.md` demo images still resolve.
-- [ ] `404.html` and `.nojekyll` exist at repo root; after merge the Pages build
-      stays `built` and `gh api …/pages --jq .custom_404` returns `true`; **no**
-      `.github/workflows/*.yml` Pages workflow was added.
+- [ ] `404.html` and `.nojekyll` exist at repo root; `404.html` references its CSS
+      and home link via **project-absolute** `/vcard-portfolio/…` paths (no relative
+      `./…` asset hrefs, no `<base href>`); after merge the Pages build stays `built`,
+      `gh api …/pages --jq .custom_404` returns `true`, and a **nested** missing URL
+      (`/vcard-portfolio/projects/does-not-exist`) renders the **styled** branded
+      page (CSS 200) with a home link that returns to `/vcard-portfolio/`, not the
+      org root; **no** `.github/workflows/*.yml` Pages workflow was added.
 - [ ] Full manual smoke test (all nav tabs, filters, modal, form, theme toggle)
       passes with no regressions.
