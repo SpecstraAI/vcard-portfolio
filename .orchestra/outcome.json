@@ -1,1 +1,5 @@
-{"verdict": "complete", "summary": "Wired contact form to Web3Forms via fetch POST with inline success/error feedback. Button shows 'Sending…' during submission. Owner must replace the placeholder access_key in index.html with a real Web3Forms key.", "artifact_ref": {"url": "https://github.com/SpecstraAI/vcard-portfolio/pull/21"}}
+{
+  "artifact_ref": { "kind": "github_pr", "number": 26, "url": "https://github.com/SpecstraAI/vcard-portfolio/pull/26" },
+  "verdict": "complete",
+  "summary": "Opened PR #26 with docs/plans/issue-9-fix-dead-links.md, an implementation plan covering all 24 href=\"#\" anchors (social icons -> verified owner destinations with aria-labels; 9 project cards -> their own full-res images, zero CSS churn; 6 blog cards -> de-anchored with line-cited CSS rename; 6 client logos unwrapped). Plan supersedes the approach in open PR #24 and includes a merge-order risk matrix versus PR #25, which deletes the blog/clients sections."
+}
