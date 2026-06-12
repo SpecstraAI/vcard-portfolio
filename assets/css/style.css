@@ -1036,7 +1036,7 @@ main {
   100% { transform: scale(1); }
 }
 
-.project-item > a { width: 100%; }
+.project-item > a { width: 100%; cursor: pointer; }
 
 .project-img {
   position: relative;
@@ -1133,6 +1133,7 @@ main {
   box-shadow: var(--shadow-4);
   border-radius: 16px;
   z-index: 1;
+  cursor: pointer;
 }
 
 .blog-post-item > a::before {
