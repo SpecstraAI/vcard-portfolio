@@ -202,10 +202,15 @@ const activatePage = function (pageName) {
   for (let i = 0; i < pages.length; i++) {
     if (pageName === pages[i].dataset.page) {
       pages[i].classList.add("active");
-      navigationLinks[i].classList.add("active");
       window.scrollTo(0, 0);
     } else {
       pages[i].classList.remove("active");
+    }
+  }
+  for (let i = 0; i < navigationLinks.length; i++) {
+    if (pageName === navigationLinks[i].innerHTML.toLowerCase()) {
+      navigationLinks[i].classList.add("active");
+    } else {
       navigationLinks[i].classList.remove("active");
     }
   }
