@@ -134,6 +134,44 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+// contact form submission
+const formStatus = document.querySelector("[data-form-status]");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  var btnLabel = formBtn.querySelector("span");
+  formBtn.setAttribute("disabled", "");
+  btnLabel.textContent = "Sending…";
+  formStatus.className = "form-status";
+  formStatus.textContent = "";
+
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: new FormData(form)
+  })
+  .then(function (response) { return response.json(); })
+  .then(function (json) {
+    if (json.success) {
+      formStatus.textContent = "Message sent! I’ll get back to you soon.";
+      formStatus.className = "form-status form-status-success";
+      form.reset();
+    } else {
+      throw new Error(json.message || "Submission failed.");
+    }
+  })
+  .catch(function (err) {
+    formStatus.textContent = err.message || "Something went wrong. Please try again.";
+    formStatus.className = "form-status form-status-error";
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    }
+  })
+  .finally(function () {
+    btnLabel.textContent = "Send Message";
+  });
+});
+
 
 
 // theme toggle
