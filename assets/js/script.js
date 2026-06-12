@@ -27,10 +27,19 @@ const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-// modal toggle function
+let lastFocusedTrigger = null;
+
+// modal open/close with focus management
 const testimonialsModalFunc = function () {
+  const isOpening = !modalContainer.classList.contains("active");
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
+  if (isOpening) {
+    modalCloseBtn.focus();
+  } else if (lastFocusedTrigger) {
+    lastFocusedTrigger.focus();
+    lastFocusedTrigger = null;
+  }
 }
 
 // add click event to all modal items
@@ -43,6 +52,7 @@ for (let i = 0; i < testimonialsItem.length; i++) {
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
 
+    lastFocusedTrigger = this;
     testimonialsModalFunc();
 
   });
@@ -52,6 +62,13 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
+
+// close modal on Escape key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && modalContainer.classList.contains("active")) {
+    testimonialsModalFunc();
+  }
+});
 
 
 
