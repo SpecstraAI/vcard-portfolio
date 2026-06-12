@@ -63,10 +63,38 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
-// close modal on Escape key
+// modal keyboard handling: Escape closes, Tab is trapped inside
 document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" && modalContainer.classList.contains("active")) {
+  if (!modalContainer.classList.contains("active")) return;
+
+  if (e.key === "Escape") {
     testimonialsModalFunc();
+    return;
+  }
+
+  if (e.key === "Tab") {
+    var focusable = Array.prototype.slice.call(
+      modalContainer.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter(function (el) { return el.offsetParent !== null; });
+
+    if (!focusable.length) { e.preventDefault(); return; }
+
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   }
 });
 
@@ -227,8 +255,10 @@ const activatePage = function (pageName) {
   for (let i = 0; i < navigationLinks.length; i++) {
     if (pageName === navigationLinks[i].innerHTML.toLowerCase()) {
       navigationLinks[i].classList.add("active");
+      navigationLinks[i].setAttribute("aria-current", "page");
     } else {
       navigationLinks[i].classList.remove("active");
+      navigationLinks[i].removeAttribute("aria-current");
     }
   }
 };
