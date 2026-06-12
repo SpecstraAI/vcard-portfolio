@@ -1305,6 +1305,29 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
+.form-status {
+  margin-top: 15px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  display: none;
+}
+
+.form-status:not(:empty) { display: block; }
+
+.form-status-success {
+  background: hsla(120, 40%, 45%, 0.15);
+  color: hsl(120, 40%, 55%);
+  border: 1px solid hsla(120, 40%, 45%, 0.3);
+}
+
+.form-status-error {
+  background: hsla(0, 43%, 51%, 0.15);
+  color: var(--bittersweet-shimmer);
+  border: 1px solid hsla(0, 43%, 51%, 0.3);
+}
+
 .cv-btn {
   position: relative;
   width: 100%;
