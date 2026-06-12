@@ -1,5 +1,135 @@
 # Implementation Plan — Performance: Self-Host Icons, Optimize Images, Remove Cruft (Issue #13)
 
+## Current-State Replan — 2026-06-12
+
+This issue was re-triaged after the prior run reached QA and reported an
+environment blocker: Playwright/Chrome could not launch because browser binaries
+and host libraries were unavailable. The implementation itself has already been
+merged to `main` through PR #18, and later PRs #20 and #21 also merged on top of
+it. Therefore the next executor must **not re-apply the original implementation
+from scratch**. Start from current `origin/main`, verify the landed work against
+the contract below, and only make a corrective production edit if one of the
+listed checks fails.
+
+### Current Main Evidence
+
+| File / command | Current state to preserve |
+| --- | --- |
+| `git log --oneline origin/main` | Contains merge PR #18 for issue #13, followed by PR #20 navigation/hash routing and PR #21 contact-form submission. |
+| `git grep -n "ion-icon" origin/main -- index.html assets/` | Returns no matches; the CDN/runtime dependency is already removed. |
+| `origin/main:index.html:251` | Theme button uses two inline SVGs: `.theme-icon--sun` and `.theme-icon--moon`. |
+| `origin/main:assets/js/script.js:178-238` | Theme toggle has no `querySelector('ion-icon')`; page navigation is now centralized in `activatePage` and hash handling from PR #20. Preserve that newer navigation structure. |
+| `origin/main:assets/js/script.js:138-176` and `origin/main:index.html:1287` | Contact-form submission/status handling from PR #21 exists. Preserve it while validating issue #13. |
+| `origin/main:assets/css/style.css:272-281` | SVG icon sizing, theme-icon visibility, and `--icon-stroke-width` rules are present. |
+| `origin/main:index.html:844-1210` | Project/blog images use `<picture>` with `.webp` sources. |
+| `git ls-tree -r --name-only origin/main` | Contains `assets/images/project-1.webp` through `project-9.webp`, `assets/images/blog-1.webp` through `blog-6.webp`, `.nojekyll`, and `404.html`; no tracked `index.txt` or `website-demo-image/Thumbs.db`. |
+| `origin/main:404.html:10-11,84` | 404 assets and home link use project-absolute `/vcard-portfolio/...` paths. |
+
+### Replan Scope and Assumptions
+
+In scope for the next implementation stage:
+- Verify that current `origin/main` satisfies the original issue #13 contract.
+- Preserve the merged PR #20 hash-routing/navigation changes in
+  `assets/js/script.js` and the merged PR #21 contact-form changes in
+  `index.html`, `assets/js/script.js`, and `assets/css/style.css`.
+- Patch only concrete gaps found during verification, using the affected-area
+  table in the original plan as the contract for any corrective edit.
+
+Out of scope for the next implementation stage:
+- Reverting PR #20 or PR #21.
+- Replacing the chosen inline-SVG approach with the lower-effort self-hosted
+  Ionicons runtime alternative.
+- Adding a GitHub Actions Pages workflow. The repo uses legacy Pages branch
+  deploys from `main` root.
+
+Assumptions:
+- The branch used by the next executor is created from current `origin/main`, not
+  from the older `1c11066` commit.
+- If browser automation remains unavailable, the executor should still run the
+  non-browser checks below and document the exact browser dependency failure
+  instead of changing production code to satisfy a tooling limitation.
+
+### Current-State Execution Steps
+
+1. Sync to current `origin/main` before editing. Confirm that `git status` is
+   clean and that the files from PR #20 and PR #21 are present:
+   `assets/js/script.js` contains `activatePage`, `hashchange`, and
+   `[data-form-status]` handling; `index.html` contains `<p class="form-status"
+   data-form-status></p>`.
+2. Run the static issue #13 gates:
+   ```bash
+   git grep -n "ion-icon" -- index.html assets/ || true
+   git grep -n "unpkg.com/ionicons" -- index.html assets/ || true
+   git ls-files | grep -E '(^index\.txt$|Thumbs\.db$)' || true
+   git ls-files 'assets/images/*.webp'
+   ```
+   The first three commands must print no issue #13 regressions; the WebP list
+   must include all nine `project-*.webp` and all six `blog-*.webp` files.
+3. Confirm all 32 image elements have explicit intrinsic dimensions. Use a DOM
+   parser if available; otherwise inspect every `<img` in `index.html` and verify
+   each has both `width` and `height`.
+4. Confirm CSS still preserves the inline-SVG contract:
+   `assets/css/style.css` must contain `svg.icon [stroke]`, `.theme-icon--moon`,
+   the two `:root[data-theme="light"]` theme-icon rules, and the three
+   `--icon-stroke-width` context rules for `.icon-box`,
+   `.modal-close-btn`, and `.project-item-icon-box`.
+5. Serve the static site locally, for example:
+   ```bash
+   python3 -m http.server 8080
+   ```
+   Manually open `http://127.0.0.1:8080/` if a browser is available. Validate the
+   theme toggle, all nav tabs, portfolio filters, testimonial modal, contact
+   form enabled/disabled state, and that no console errors appear.
+6. If browser automation is available, run a Playwright smoke that checks:
+   default page renders, all five nav buttons activate their matching article,
+   theme toggle flips `document.documentElement.dataset.theme`, project/blog
+   image current requests prefer WebP, and `404.html` links resolve to
+   `/vcard-portfolio/`.
+7. If any static or browser check fails, make the smallest corrective edit in the
+   file named by the failed check, then re-run the relevant checks. Do not modify
+   unrelated SEO metadata, contact-form submission, or hash-routing behavior.
+
+### Current-State Validation Strategy
+
+- Static verification: `git grep` gates for `ion-icon`/Ionicons CDN, tracked
+  cruft absence, WebP file presence, all `<img>` dimensions, SVG CSS rules, and
+  project-absolute 404 paths.
+- Manual browser verification: local `python3 -m http.server` smoke across
+  desktop and mobile viewport widths.
+- Automated browser verification when dependencies allow it: Playwright smoke for
+  navigation, theme toggle, modal open/close, portfolio filtering, WebP source
+  selection, and 404 path behavior.
+- Pages verification after merge: `gh api repos/SpecstraAI/vcard-portfolio/pages`
+  should report `status: "built"` and `custom_404: true`; nested missing URL
+  `/vcard-portfolio/projects/does-not-exist` should load
+  `/vcard-portfolio/assets/css/style.css` with HTTP 200.
+
+### Current-State Risks and Mitigations
+
+| Risk | Mitigation |
+| --- | --- |
+| Re-applying the original plan from the old branch overwrites PR #20 hash routing or PR #21 contact-form code. | Start from `origin/main`, verify `activatePage`, `hashchange`, and `data-form-status` before editing, and treat them as preserved behavior. |
+| QA fails again because the environment lacks browser dependencies. | Report the browser dependency failure separately from implementation status; still complete static gates and manual checks that the environment supports. |
+| A corrective edit accidentally restores the Ionicons runtime. | Keep the zero-hit `git grep -n "ion-icon" -- index.html assets/` and `git grep -n "unpkg.com/ionicons" -- index.html assets/` gates mandatory. |
+| 404 validation passes at a shallow URL but fails for nested paths. | Test `/vcard-portfolio/projects/does-not-exist` and verify CSS loads from `/vcard-portfolio/assets/css/style.css`. |
+
+### Current-State Success Criteria
+
+- `origin/main` or the implementation branch has zero `ion-icon` and zero
+  `unpkg.com/ionicons` references in `index.html` and `assets/`.
+- All nine project WebP files and all six blog WebP files are tracked, and the
+  matching project/blog `<img>` elements are inside `<picture>` wrappers with
+  WebP `<source>` elements.
+- Every `<img>` in `index.html` has both `width` and `height`.
+- `index.txt` and `website-demo-image/Thumbs.db` are not tracked.
+- `404.html` and `.nojekyll` are tracked; `404.html` uses
+  `/vcard-portfolio/assets/css/style.css` and `/vcard-portfolio/`.
+- PR #20 navigation/hash routing and PR #21 contact-form submission remain
+  present after any corrective edit.
+- Manual or automated browser smoke passes; if browser smoke cannot run, the
+  implementation report names the missing browser dependency and includes the
+  passing static checks.
+
 ## Summary
 
 This is a performance-and-hygiene pass on the static vCard portfolio. It has four
@@ -36,12 +166,12 @@ There is **no build step** in this project (the project brief states "The
 repository files are the deployable artefacts"). Every artifact below is committed
 as a static file; nothing is generated at deploy time.
 
-> **Note on overlap:** The Ionicons CDN tags are at `index.html:1215–1216` (not
-> `1196–1197` as the issue states — line numbers shifted after the theme-toggle
-> merge, PR #5). PRs #16 (`feat/15…`, SVG favicon + hash routing) and #17
-> (`plan/14…`, accessibility) are open and also touch `<head>`/the navbar/icons.
-> Sequence this work to land after them, or expect minor merge conflicts in
-> `<head>` and the navbar region — see [Risks](#risks-and-mitigations).
+> **Historical line-note:** The Ionicons CDN tags were at
+> `index.html:1215–1216` when this plan was first written (not `1196–1197` as
+> the issue stated — line numbers shifted after the theme-toggle merge, PR #5).
+> On current `main`, PR #18 has already removed those tags, PR #20 has merged
+> hash routing, and PR #21 has merged contact-form submission. The
+> Current-State Replan above supersedes any old merge-conflict guidance.
 
 ## Scope and Assumptions
 
