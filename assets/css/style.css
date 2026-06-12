@@ -353,6 +353,10 @@ article.active {
   box-shadow: var(--shadow-2);
   cursor: pointer;
   z-index: 1;
+  width: 100%;
+  border: 0;
+  font: inherit;
+  text-align: left;
 }
 
 .content-card::before {
