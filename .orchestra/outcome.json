@@ -1,1 +1,0 @@
-{"verdict": "complete", "summary": "Wired contact form to Web3Forms via fetch POST with inline success/error feedback. Button shows 'Sending…' during submission. Owner must replace the placeholder access_key in index.html with a real Web3Forms key.", "artifact_ref": {"url": "https://github.com/SpecstraAI/vcard-portfolio/pull/21"}}

@@ -3,3 +3,6 @@ Thumbs.db
 ehthumbs.db
 desktop.ini
 .DS_Store
+
+# Orchestra runtime files — must never be committed
+.orchestra/
