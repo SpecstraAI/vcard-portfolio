@@ -263,24 +263,34 @@ const activatePage = function (pageName) {
   }
 };
 
-// add event to all nav link — also update URL hash
+// add event to all nav links — push a new history entry so Back/Forward works
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
     var pageName = this.innerHTML.toLowerCase();
-    history.replaceState(null, '', '#' + pageName);
+    // only push when the tab actually changes, so repeated clicks on the
+    // active tab don't stack duplicate history entries
+    if (window.location.hash.slice(1).toLowerCase() !== pageName) {
+      history.pushState(null, '', '#' + pageName);
+    }
     activatePage(pageName);
   });
 }
 
-// activate the page indicated by the URL hash, falling back to the first page
+// activate the page indicated by the URL hash (matched case-insensitively),
+// falling back to the first/default page when it's missing or unknown
 const handleHash = function () {
-  var hash = window.location.hash.slice(1);
-  var valid = false;
+  var hash = window.location.hash.slice(1).toLowerCase();
   for (var i = 0; i < pages.length; i++) {
-    if (pages[i].dataset.page === hash) { valid = true; break; }
+    if (pages[i].dataset.page.toLowerCase() === hash) {
+      activatePage(pages[i].dataset.page);
+      return;
+    }
   }
-  activatePage(valid ? hash : pages[0].dataset.page);
+  activatePage(pages[0].dataset.page);
 };
 
+// Back/Forward (and any external hash change) re-activates the matching tab
 window.addEventListener('hashchange', handleHash);
+
+// activate the correct tab on initial load (deep-link + reload safe)
 handleHash();
