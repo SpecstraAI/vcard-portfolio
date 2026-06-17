@@ -263,11 +263,15 @@ const activatePage = function (pageName) {
   }
 };
 
-// add event to all nav link — also update URL hash
+// add event to all nav link — push a history entry so Back/Forward works
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
     var pageName = this.innerHTML.toLowerCase();
-    history.replaceState(null, '', '#' + pageName);
+    // Only push a new entry when the tab actually changes, so repeated clicks
+    // on the active tab don't stack dead history entries.
+    if (window.location.hash.slice(1) !== pageName) {
+      history.pushState(null, '', '#' + pageName);
+    }
     activatePage(pageName);
   });
 }
