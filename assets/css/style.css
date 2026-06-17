@@ -2037,3 +2037,61 @@ textarea.form-input::-webkit-resizer { display: none; }
   [data-theme="light"] body::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 0%, 0.25); }
 
 }
+
+
+
+
+
+/*-----------------------------------*\
+  #REDUCED MOTION
+\*-----------------------------------*/
+
+/**
+ * Respect the OS-level "reduce motion" preference. Neutralize nontrivial
+ * motion (sidebar slide, modal scale-up, tab fades, hover lifts, smooth
+ * scroll) while leaving colors, layout, spacing, and final visible states
+ * untouched. Hover/focus color changes still apply.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /**
+   * Collapsing durations alone leaves transform-based scale/movement in
+   * place (it just snaps). Neutralize those transforms so the result is
+   * truly static. Non-motion hover/focus cues (opacity, overlay, color)
+   * are intentionally preserved, and final resting states are unchanged.
+   */
+
+  /* Project card: cancel the image zoom-on-hover. The darkening overlay
+     (.project-img::before) remains as the hover cue. */
+  .project-item > a:hover img {
+    transform: none;
+  }
+
+  /* Project grid: drop the scale-up entrance animation on filter. */
+  .project-item.active {
+    animation: none;
+  }
+
+  /* Project overlay icon: hold at its final scale so it fades in
+     (opacity) without growing; centering translate is preserved. */
+  .project-item-icon-box {
+    --scale: 1;
+  }
+
+  /* Testimonials modal: open without the zoom; opacity fade remains. */
+  .testimonials-modal,
+  .modal-container.active .testimonials-modal {
+    transform: none;
+  }
+
+}
