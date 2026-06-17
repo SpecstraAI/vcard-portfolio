@@ -5,36 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Morgan — UI/UX Designer | Portfolio</title>
-
-  <!-- SEO -->
-  <meta name="description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
-  <meta name="author" content="Alex Morgan">
-  <link rel="canonical" href="https://specstraai.github.io/vcard-portfolio/">
-
-  <!-- Theme color (dark / light) -->
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://specstraai.github.io/vcard-portfolio/">
-  <meta property="og:title" content="Alex Morgan — UI/UX Designer | Portfolio">
-  <meta property="og:description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
-  <meta property="og:image" content="https://specstraai.github.io/vcard-portfolio/assets/images/my-avatar.png">
-  <meta property="og:image:width" content="200">
-  <meta property="og:image:height" content="196">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Alex Morgan — UI/UX Designer | Portfolio">
-  <meta name="twitter:description" content="Alex Morgan is a UI/UX Designer from Austin, Texas, crafting beautiful, intuitive web experiences and print media.">
-  <meta name="twitter:image" content="https://specstraai.github.io/vcard-portfolio/assets/images/my-avatar.png">
+  <title>vCard - Personal Portfolio</title>
 
   <!--
     - favicon
   -->
-  <link rel="icon" href="./assets/images/logo.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
   <!--
@@ -56,26 +31,6 @@
       if (theme === 'light') document.documentElement.dataset.theme = 'light';
     })();
   </script>
-
-  <!-- JSON-LD Person schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Alex Morgan",
-    "jobTitle": "UI/UX Designer",
-    "email": "alex.morgan@example.com",
-    "telephone": "+15558675309",
-    "url": "https://specstraai.github.io/vcard-portfolio/",
-    "image": "https://specstraai.github.io/vcard-portfolio/assets/images/my-avatar.png",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Austin",
-      "addressRegion": "TX",
-      "addressCountry": "US"
-    }
-  }
-  </script>
 </head>
 
 <body>
@@ -95,7 +50,7 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Alex Morgan" width="200" height="196">
+          <img src="./assets/images/my-avatar.png" alt="Alex Morgan" width="80">
         </figure>
 
         <div class="info-content">
@@ -107,7 +62,7 @@
         <button class="info_more-btn" data-sidebar-btn>
           <span>Show Contacts</span>
 
-          <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M112 184l144 144 144-144"/></svg>
+          <ion-icon name="chevron-down"></ion-icon>
         </button>
 
       </div>
@@ -121,7 +76,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><rect x="48" y="96" width="416" height="320" rx="40" ry="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M112 160l144 112 144-112"/></svg>
+              <ion-icon name="mail-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
@@ -135,7 +90,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><rect x="128" y="16" width="256" height="480" rx="48" ry="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M176 16h24a8 8 0 018 8h0a16 16 0 0016 16h64a16 16 0 0016-16h0a8 8 0 018-8h24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <ion-icon name="phone-portrait-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
@@ -149,7 +104,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><rect fill="none" stroke="currentColor" stroke-linejoin="round" x="48" y="80" width="416" height="384" rx="48"/><circle cx="296" cy="232" r="24"/><circle cx="376" cy="232" r="24"/><circle cx="296" cy="312" r="24"/><circle cx="376" cy="312" r="24"/><circle cx="136" cy="312" r="24"/><circle cx="216" cy="312" r="24"/><circle cx="136" cy="392" r="24"/><circle cx="216" cy="392" r="24"/><circle cx="296" cy="392" r="24"/><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" d="M128 48v32M384 48v32"/><path fill="none" stroke="currentColor" stroke-linejoin="round" d="M464 160H48"/></svg>
+              <ion-icon name="calendar-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
@@ -163,7 +118,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 48c-79.5 0-144 61.39-144 137 0 87 96 224.87 131.25 272.49a15.77 15.77 0 0025.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="192" r="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <ion-icon name="location-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
@@ -177,36 +132,9 @@
         </ul>
 
         <a href="assets/cv.pdf" download class="cv-btn">
-          <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M336 176h40a40 40 0 0140 40v208a40 40 0 01-40 40H136a40 40 0 01-40-40V216a40 40 0 0140-40h40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M176 272l80 80 80-80M256 48v288"/></svg>
+          <ion-icon name="download-outline"></ion-icon>
           <span>Download CV</span>
         </a>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <!-- TODO: replace with Alex Morgan's real Facebook profile URL -->
-            <a href="https://www.facebook.com/alex.morgan" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Alex Morgan on Facebook">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z" fill="currentColor" fill-rule="evenodd"/></svg>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <!-- TODO: replace with Alex Morgan's real Twitter/X profile URL -->
-            <a href="https://twitter.com/alex_morgan" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Alex Morgan on Twitter">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M496 109.5a201.8 201.8 0 01-56.55 15.3 97.51 97.51 0 0043.33-53.6 197.74 197.74 0 01-62.56 23.5A99.14 99.14 0 00348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 002.54 22.1 280.7 280.7 0 01-203-101.3A95.69 95.69 0 0036 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0135.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 01-25.94 3.4 94.38 94.38 0 01-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0139.5 405.6a203 203 0 01-23.5-1.4A278.68 278.68 0 00166.74 448c181.36 0 280.44-147.7 280.44-275.8 0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 00496 109.5z" fill="currentColor"/></svg>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <!-- TODO: replace with Alex Morgan's real Instagram profile URL -->
-            <a href="https://www.instagram.com/alex.morgan" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Alex Morgan on Instagram">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z" fill="currentColor"/><path d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z" fill="currentColor"/></svg>
-            </a>
-          </li>
-
-        </ul>
 
       </div>
 
@@ -252,8 +180,7 @@
 
           <li class="navbar-item">
             <button class="theme-btn" data-theme-btn aria-label="Toggle light/dark theme">
-              <svg class="icon theme-icon theme-icon--sun" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" d="M256 48v48M256 416v48M403.08 108.92l-33.94 33.94M142.86 369.14l-33.94 33.94M464 256h-48M96 256H48M403.08 403.08l-33.94-33.94M142.86 142.86l-33.94-33.94"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"/></svg>
-              <svg class="icon theme-icon theme-icon--moon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160 136c0-30.62 4.51-61.61 16-88C99.57 81.27 48 159.32 48 248c0 119.29 96.71 216 216 216 88.68 0 166.73-51.57 200-128-26.39 11.49-57.38 16-88 16-119.29 0-216-96.71-216-216z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <ion-icon name="sunny-outline"></ion-icon>
             </button>
           </li>
 
@@ -305,7 +232,8 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg" alt="design icon" width="40" height="40">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
               </div>
 
               <div class="service-content-box">
@@ -321,7 +249,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40" height="32">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
               </div>
 
               <div class="service-content-box">
@@ -337,7 +265,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40" height="40">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
               </div>
 
               <div class="service-content-box">
@@ -353,7 +281,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40" height="30">
+                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
               </div>
 
               <div class="service-content-box">
@@ -382,10 +310,10 @@
           <ul class="testimonials-list has-scrollbar">
 
             <li class="testimonials-item">
-              <button type="button" class="content-card" data-testimonials-item>
+              <div class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" height="60" data-testimonials-avatar>
+                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
                 </figure>
 
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
@@ -400,14 +328,14 @@
                   </p>
                 </div>
 
-              </button>
+              </div>
             </li>
 
             <li class="testimonials-item">
-              <button type="button" class="content-card" data-testimonials-item>
+              <div class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" height="60" data-testimonials-avatar>
+                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
                 </figure>
 
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
@@ -422,14 +350,14 @@
                   </p>
                 </div>
 
-              </button>
+              </div>
             </li>
 
             <li class="testimonials-item">
-              <button type="button" class="content-card" data-testimonials-item>
+              <div class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" height="60" data-testimonials-avatar>
+                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
                 </figure>
 
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
@@ -444,14 +372,14 @@
                   </p>
                 </div>
 
-              </button>
+              </div>
             </li>
 
             <li class="testimonials-item">
-              <button type="button" class="content-card" data-testimonials-item>
+              <div class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" height="60" data-testimonials-avatar>
+                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
                 </figure>
 
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
@@ -466,7 +394,7 @@
                   </p>
                 </div>
 
-              </button>
+              </div>
             </li>
 
           </ul>
@@ -478,27 +406,27 @@
           - testimonials modal
         -->
 
-        <div class="modal-container" data-modal-container role="dialog" aria-modal="true" aria-labelledby="modal-label">
+        <div class="modal-container" data-modal-container>
 
           <div class="overlay" data-overlay></div>
 
           <section class="testimonials-modal">
 
-            <button class="modal-close-btn" data-modal-close-btn aria-label="Close modal">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M368 368L144 144M368 144L144 368"/></svg>
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
             </button>
 
             <div class="modal-img-wrapper">
               <figure class="modal-avatar-box">
-                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" height="80" data-modal-img>
+                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
               </figure>
 
-              <img src="./assets/images/icon-quote.svg" alt="quote icon" width="34" height="23">
+              <img src="./assets/images/icon-quote.svg" alt="quote icon">
             </div>
 
             <div class="modal-content">
 
-              <h4 class="h3 modal-title" id="modal-label" data-modal-title>Daniel lewis</h4>
+              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
 
               <time datetime="2021-06-14">14 June, 2021</time>
 
@@ -531,37 +459,37 @@
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-1-color.png" alt="client logo">
               </a>
             </li>
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-2-color.png" alt="client logo">
               </a>
             </li>
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-3-color.png" alt="client logo">
               </a>
             </li>
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-4-color.png" alt="client logo">
               </a>
             </li>
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-5-color.png" alt="client logo">
               </a>
             </li>
 
             <li class="clients-item">
               <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo" width="209" height="131">
+                <img src="./assets/images/logo-6-color.png" alt="client logo">
               </a>
             </li>
 
@@ -589,7 +517,7 @@
 
           <div class="title-wrapper">
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <ion-icon name="book-outline"></ion-icon>
             </div>
 
             <h3 class="h3">Education</h3>
@@ -646,7 +574,7 @@
 
           <div class="title-wrapper">
             <div class="icon-box">
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <ion-icon name="book-outline"></ion-icon>
             </div>
 
             <h3 class="h3">Experience</h3>
@@ -807,7 +735,7 @@
               <div class="select-value" data-selecct-value>Select category</div>
 
               <div class="select-icon">
-                <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M112 184l144 144 144-144"/></svg>
+                <ion-icon name="chevron-down"></ion-icon>
               </div>
 
             </button>
@@ -841,13 +769,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-1.webp" type="image/webp">
-                    <img src="./assets/images/project-1.jpg" alt="finance" width="600" height="451" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Finance</h3>
@@ -862,13 +787,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-2.webp" type="image/webp">
-                    <img src="./assets/images/project-2.png" alt="orizon" width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Orizon</h3>
@@ -883,13 +805,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-3.webp" type="image/webp">
-                    <img src="./assets/images/project-3.jpg" alt="fundo" width="600" height="451" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Fundo</h3>
@@ -904,13 +823,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-4.webp" type="image/webp">
-                    <img src="./assets/images/project-4.png" alt="brawlhalla" width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Brawlhalla</h3>
@@ -925,13 +841,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-5.webp" type="image/webp">
-                    <img src="./assets/images/project-5.png" alt="dsm." width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
                 </figure>
 
                 <h3 class="project-title">DSM.</h3>
@@ -946,13 +859,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-6.webp" type="image/webp">
-                    <img src="./assets/images/project-6.png" alt="metaspark" width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">MetaSpark</h3>
@@ -967,13 +877,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-7.webp" type="image/webp">
-                    <img src="./assets/images/project-7.png" alt="summary" width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Summary</h3>
@@ -988,13 +895,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-8.webp" type="image/webp">
-                    <img src="./assets/images/project-8.jpg" alt="task manager" width="600" height="451" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Task Manager</h3>
@@ -1009,13 +913,10 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10"/></svg>
+                    <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <picture>
-                    <source srcset="./assets/images/project-9.webp" type="image/webp">
-                    <img src="./assets/images/project-9.png" alt="arrival" width="600" height="450" loading="lazy">
-                  </picture>
+                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
                 </figure>
 
                 <h3 class="project-title">Arrival</h3>
@@ -1053,10 +954,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-1.webp" type="image/webp">
-                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" width="601" height="401" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1084,10 +982,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-2.webp" type="image/webp">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" width="601" height="401" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1115,10 +1010,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-3.webp" type="image/webp">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" width="601" height="401" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1146,10 +1038,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-4.webp" type="image/webp">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" width="601" height="401" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1177,10 +1066,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-5.webp" type="image/webp">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" width="600" height="391" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1208,10 +1094,7 @@
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <picture>
-                  <source srcset="./assets/images/blog-6.webp" type="image/webp">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" width="600" height="394" loading="lazy">
-                </picture>
+                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1267,10 +1150,7 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="https://api.web3forms.com/submit" class="form" data-form>
-
-            <!-- Replace YOUR_ACCESS_KEY with your Web3Forms access key from https://web3forms.com -->
-            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+          <form action="#" class="form" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -1281,13 +1161,11 @@
             <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
-              <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M473 39.05a24 24 0 00-25.5-5.46L47.47 185h-.08a24 24 0 001 45.16l.41.13 137.3 58.63a16 16 0 0015.54-3.59L422 80a7.07 7.07 0 0110 10L226.66 310.26a16 16 0 00-3.59 15.54l58.65 137.38c.06.2.12.38.19.57 3.2 9.27 11.3 15.81 21.09 16.25h1a24.63 24.63 0 0023-15.46L478.39 64.62A24 24 0 00473 39.05z" fill="currentColor"/></svg>
+              <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
 
           </form>
-
-          <p class="form-status" data-form-status></p>
 
         </section>
 
@@ -1307,7 +1185,11 @@
   -->
   <script src="./assets/js/script.js"></script>
 
-
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 

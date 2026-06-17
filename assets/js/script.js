@@ -27,19 +27,10 @@ const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-let lastFocusedTrigger = null;
-
-// modal open/close with focus management
+// modal toggle function
 const testimonialsModalFunc = function () {
-  const isOpening = !modalContainer.classList.contains("active");
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
-  if (isOpening) {
-    modalCloseBtn.focus();
-  } else if (lastFocusedTrigger) {
-    lastFocusedTrigger.focus();
-    lastFocusedTrigger = null;
-  }
 }
 
 // add click event to all modal items
@@ -52,7 +43,6 @@ for (let i = 0; i < testimonialsItem.length; i++) {
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
 
-    lastFocusedTrigger = this;
     testimonialsModalFunc();
 
   });
@@ -62,13 +52,6 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
-
-// close modal on Escape key
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" && modalContainer.classList.contains("active")) {
-    testimonialsModalFunc();
-  }
-});
 
 
 
@@ -151,44 +134,6 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// contact form submission
-const formStatus = document.querySelector("[data-form-status]");
-
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  var btnLabel = formBtn.querySelector("span");
-  formBtn.setAttribute("disabled", "");
-  btnLabel.textContent = "Sending…";
-  formStatus.className = "form-status";
-  formStatus.textContent = "";
-
-  fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    body: new FormData(form)
-  })
-  .then(function (response) { return response.json(); })
-  .then(function (json) {
-    if (json.success) {
-      formStatus.textContent = "Message sent! I’ll get back to you soon.";
-      formStatus.className = "form-status form-status-success";
-      form.reset();
-    } else {
-      throw new Error(json.message || "Submission failed.");
-    }
-  })
-  .catch(function (err) {
-    formStatus.textContent = err.message || "Something went wrong. Please try again.";
-    formStatus.className = "form-status form-status-error";
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    }
-  })
-  .finally(function () {
-    btnLabel.textContent = "Send Message";
-  });
-});
-
 
 
 // theme toggle
@@ -197,11 +142,19 @@ const themeBtn = document.querySelector("[data-theme-btn]");
 const applyTheme = function (theme) {
   if (theme === 'light') {
     document.documentElement.dataset.theme = 'light';
+    themeBtn.querySelector('ion-icon').setAttribute('name', 'moon-outline');
   } else {
     delete document.documentElement.dataset.theme;
+    themeBtn.querySelector('ion-icon').setAttribute('name', 'sunny-outline');
   }
   localStorage.setItem('theme', theme);
 };
+
+// set initial icon to reflect the current theme (set by inline <head> script)
+(function () {
+  var current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  themeBtn.querySelector('ion-icon').setAttribute('name', current === 'light' ? 'moon-outline' : 'sunny-outline');
+})();
 
 themeBtn.addEventListener('click', function () {
   var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
@@ -214,43 +167,20 @@ themeBtn.addEventListener('click', function () {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// activate a page by name and sync nav link state
-const activatePage = function (pageName) {
-  for (let i = 0; i < pages.length; i++) {
-    if (pageName === pages[i].dataset.page) {
-      pages[i].classList.add("active");
-      window.scrollTo(0, 0);
-    } else {
-      pages[i].classList.remove("active");
-    }
-  }
-  for (let i = 0; i < navigationLinks.length; i++) {
-    if (pageName === navigationLinks[i].innerHTML.toLowerCase()) {
-      navigationLinks[i].classList.add("active");
-    } else {
-      navigationLinks[i].classList.remove("active");
-    }
-  }
-};
-
-// add event to all nav link — also update URL hash
+// add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-    var pageName = this.innerHTML.toLowerCase();
-    history.replaceState(null, '', '#' + pageName);
-    activatePage(pageName);
+
+    for (let i = 0; i < pages.length; i++) {
+      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+        pages[i].classList.add("active");
+        navigationLinks[i].classList.add("active");
+        window.scrollTo(0, 0);
+      } else {
+        pages[i].classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
+    }
+
   });
 }
-
-// activate the page indicated by the URL hash, falling back to the first page
-const handleHash = function () {
-  var hash = window.location.hash.slice(1);
-  var valid = false;
-  for (var i = 0; i < pages.length; i++) {
-    if (pages[i].dataset.page === hash) { valid = true; break; }
-  }
-  activatePage(valid ? hash : pages[0].dataset.page);
-};
-
-window.addEventListener('hashchange', handleHash);
-handleHash();
