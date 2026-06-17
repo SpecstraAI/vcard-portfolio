@@ -368,7 +368,7 @@
           <ul class="testimonials-list has-scrollbar">
 
             <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
+              <button type="button" class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" height="60" data-testimonials-avatar>
@@ -386,11 +386,11 @@
                   </p>
                 </div>
 
-              </div>
+              </button>
             </li>
 
             <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
+              <button type="button" class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" height="60" data-testimonials-avatar>
@@ -408,11 +408,11 @@
                   </p>
                 </div>
 
-              </div>
+              </button>
             </li>
 
             <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
+              <button type="button" class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" height="60" data-testimonials-avatar>
@@ -430,11 +430,11 @@
                   </p>
                 </div>
 
-              </div>
+              </button>
             </li>
 
             <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
+              <button type="button" class="content-card" data-testimonials-item>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" height="60" data-testimonials-avatar>
@@ -452,7 +452,7 @@
                   </p>
                 </div>
 
-              </div>
+              </button>
             </li>
 
           </ul>
@@ -464,13 +464,13 @@
           - testimonials modal
         -->
 
-        <div class="modal-container" data-modal-container>
+        <div class="modal-container" data-modal-container role="dialog" aria-modal="true" aria-labelledby="modal-label">
 
           <div class="overlay" data-overlay></div>
 
           <section class="testimonials-modal">
 
-            <button class="modal-close-btn" data-modal-close-btn>
+            <button class="modal-close-btn" data-modal-close-btn aria-label="Close modal">
               <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M368 368L144 144M368 144L144 368"/></svg>
             </button>
 
@@ -484,7 +484,7 @@
 
             <div class="modal-content">
 
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+              <h4 class="h3 modal-title" id="modal-label" data-modal-title>Daniel lewis</h4>
 
               <time datetime="2021-06-14">14 June, 2021</time>
 
@@ -516,27 +516,27 @@
           <ul class="clients-list has-scrollbar">
 
             <li class="clients-item">
-              <img src="./assets/images/logo-1-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-1-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
             <li class="clients-item">
-              <img src="./assets/images/logo-2-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-2-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
             <li class="clients-item">
-              <img src="./assets/images/logo-3-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-3-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
             <li class="clients-item">
-              <img src="./assets/images/logo-4-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-4-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
             <li class="clients-item">
-              <img src="./assets/images/logo-5-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-5-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
             <li class="clients-item">
-              <img src="./assets/images/logo-6-color.png" alt="client logo" width="209" height="131">
+              <img src="./assets/images/logo-6-color.png" alt="" aria-hidden="true" width="209" height="131">
             </li>
 
           </ul>
@@ -820,7 +820,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-1.webp" type="image/webp">
-                    <img src="./assets/images/project-1.jpg" alt="finance" width="600" height="451" loading="lazy">
+                    <img src="./assets/images/project-1.jpg" alt="Finance" width="600" height="451" loading="lazy">
                   </picture>
                 </figure>
 
@@ -841,7 +841,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-2.webp" type="image/webp">
-                    <img src="./assets/images/project-2.png" alt="orizon" width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-2.png" alt="Orizon" width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 
@@ -862,7 +862,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-3.webp" type="image/webp">
-                    <img src="./assets/images/project-3.jpg" alt="fundo" width="600" height="451" loading="lazy">
+                    <img src="./assets/images/project-3.jpg" alt="Fundo" width="600" height="451" loading="lazy">
                   </picture>
                 </figure>
 
@@ -883,7 +883,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-4.webp" type="image/webp">
-                    <img src="./assets/images/project-4.png" alt="brawlhalla" width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-4.png" alt="Brawlhalla" width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 
@@ -904,7 +904,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-5.webp" type="image/webp">
-                    <img src="./assets/images/project-5.png" alt="dsm." width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-5.png" alt="DSM." width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 
@@ -925,7 +925,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-6.webp" type="image/webp">
-                    <img src="./assets/images/project-6.png" alt="metaspark" width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-6.png" alt="MetaSpark" width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 
@@ -946,7 +946,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-7.webp" type="image/webp">
-                    <img src="./assets/images/project-7.png" alt="summary" width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-7.png" alt="Summary" width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 
@@ -967,7 +967,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-8.webp" type="image/webp">
-                    <img src="./assets/images/project-8.jpg" alt="task manager" width="600" height="451" loading="lazy">
+                    <img src="./assets/images/project-8.jpg" alt="Task Manager" width="600" height="451" loading="lazy">
                   </picture>
                 </figure>
 
@@ -988,7 +988,7 @@
 
                   <picture>
                     <source srcset="./assets/images/project-9.webp" type="image/webp">
-                    <img src="./assets/images/project-9.png" alt="arrival" width="600" height="450" loading="lazy">
+                    <img src="./assets/images/project-9.png" alt="Arrival" width="600" height="450" loading="lazy">
                   </picture>
                 </figure>
 

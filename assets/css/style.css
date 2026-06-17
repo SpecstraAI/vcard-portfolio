@@ -161,7 +161,7 @@
   --orange-yellow-crayola: hsl(40, 90%, 38%);
   --vegas-gold: hsl(40, 60%, 35%);
   --light-gray: hsl(0, 0%, 30%);
-  --light-gray-70: hsla(0, 0%, 30%, 0.7);
+  --light-gray-70: hsl(0, 0%, 40%);
   --bittersweet-shimmer: hsl(0, 43%, 40%);
 
   /* shadow */
@@ -353,6 +353,10 @@ article.active {
   box-shadow: var(--shadow-2);
   cursor: pointer;
   z-index: 1;
+  width: 100%;
+  border: 0;
+  font: inherit;
+  text-align: left;
 }
 
 .content-card::before {
