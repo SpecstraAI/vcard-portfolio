@@ -268,8 +268,10 @@ for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
     var pageName = this.innerHTML.toLowerCase();
     // Only push a new entry when the tab actually changes, so repeated clicks
-    // on the active tab don't stack dead history entries.
-    if (window.location.hash.slice(1) !== pageName) {
+    // on the active tab don't stack dead history entries. Normalize the current
+    // hash the same way handleHash() does so a mixed-case existing hash isn't
+    // treated as different from the lowercase target.
+    if (window.location.hash.slice(1).toLowerCase() !== pageName) {
       history.pushState(null, '', '#' + pageName);
     }
     activatePage(pageName);
@@ -278,7 +280,10 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
 // activate the page indicated by the URL hash, falling back to the first page
 const handleHash = function () {
-  var hash = window.location.hash.slice(1);
+  // Match hashes case-insensitively so a mixed-case deep link such as
+  // /#Portfolio still resolves to the Portfolio tab. data-page values are the
+  // canonical lowercase names, so lowercase the fragment before comparing.
+  var hash = window.location.hash.slice(1).toLowerCase();
   var valid = false;
   for (var i = 0; i < pages.length; i++) {
     if (pages[i].dataset.page === hash) { valid = true; break; }
