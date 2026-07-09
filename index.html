@@ -1246,6 +1246,11 @@
             <!-- Replace YOUR_ACCESS_KEY with your Web3Forms access key from https://web3forms.com -->
             <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
 
+            <!-- Honeypot spam trap: Web3Forms rejects submissions where "botcheck" is filled. Hidden off-screen (not display:none) and kept out of tab order / assistive tech, so only bots fill it. -->
+            <div class="honeypot" aria-hidden="true">
+              <input type="text" name="botcheck" tabindex="-1" autocomplete="off" data-honeypot>
+            </div>
+
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
 

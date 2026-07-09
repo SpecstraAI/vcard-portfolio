@@ -1229,6 +1229,18 @@ main {
 
 .form-title { margin-bottom: 20px; }
 
+/**
+ * Honeypot spam trap: kept in the DOM and rendered off-screen (not display:none,
+ * which some bots skip) so real users never see or tab to it, but bots still fill it.
+ */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .input-wrapper {
   display: grid;
   grid-template-columns: 1fr;
