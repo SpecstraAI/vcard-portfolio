@@ -1,9 +1,13 @@
 # Issue #59 — Restyle Blog page
 
-**Type:** implementation plan (plan stage). No CSS is changed by this stage — this
-document is the contract the *implement* stage follows.
+**Type:** implementation plan **and** implementation. This PR (#67) ships **both** this
+plan document *and* the Blog restyle CSS it specifies — the plan and implement stages of
+this pipeline share one PR. The three `#BLOG` `border-radius` literals called out in §4
+are already converted to T1 radius tokens in `assets/css/style.css` on this branch (see
+the commit `style(blog): tokenize post-card and meta-dot radii`); this document is the
+contract that change follows and the record of what shipped.
 **Base branch:** `epic/53-restyle-vcard-portfolio-to-a-modern-mini` (never `main`).
-**Only file the implement stage may change:** `assets/css/style.css`.
+**File changed by the implementation:** `assets/css/style.css` (`#BLOG` selectors only).
 **Parent:** #53 (epic). This is child **T6**, the Blog section child. It depends on
 **T1** (#54, merged) which already defined every token this plan consumes, and follows
 **T2** (#55, chrome), **T3** (#56, About), **T4** (#57, Resume), **T5** (#58,
