@@ -218,3 +218,54 @@ one-line comment explaining what it cancels and what cue it leaves intact (mirro
   PR carries the plan doc plus the QA evidence and **no CSS diff** is acceptable and expected.
 - The `.cv-btn` residual (§7) is flagged, not fixed.
 - PR opened against `epic/53-…`, `Closes #61`.
+
+---
+
+## 10. Reconciliation audit results
+
+Performed as a **static, code-level audit** of the merged restyle against the two audit-owned
+blocks. (This stage ran in a headless environment with no browser, so the visual DevTools walk of
+§4 was reproduced analytically from the CSS rather than from live screenshots; the analysis below is
+grounded in the actual rules on this branch, verified by `git diff main...HEAD --
+assets/css/style.css` and targeted greps.)
+
+**Result: no `#RESPONSIVE` or `#REDUCED MOTION` change is warranted — zero CSS diff, exactly as §1
+predicted.**
+
+### Motion (`#REDUCED MOTION`) — coverage confirmed complete
+
+- Grepping the whole stylesheet for `transform:|animation:|@keyframes|transition:|will-change` (minus
+  `text-transform`) and filtering the restyle diff for the same shows the restyle added **no new
+  keyframes, animations, transform-based effects, or transitions** — its only motion-adjacent lines
+  are background-color tokenizations (scrim / scrollbar-thumb hover). The §3 assertion holds on this
+  branch.
+- Every state-triggered effect still maps to an existing neutralization: image zoom-on-hover
+  (`.project-item > a:hover img`) → `transform: none` (`style.css:2118`); filter entrance
+  (`.project-item.active`) → `animation: none` (`:2123`); overlay icon scale
+  (`.project-item-icon-box`) → `--scale: 1` (`:2129`); modal zoom (`.testimonials-modal`) →
+  `transform: none` (`:2134`); tab/section fade + smooth scroll → the blanket duration collapse
+  (`:2103`–`2106`). The filter-chevron rotate is intentionally left to snap to its "open" state.
+- No override leakage: all neutralizations remain scoped inside
+  `@media (prefers-reduced-motion: reduce)`, so normal-motion rendering is unaffected.
+
+### Layout (`#RESPONSIVE`) — no overflow/clipping/shift introduced
+
+- The only geometry-affecting restyle change is the `:root` type scale. Below 580px, `--fs-1`
+  (24→**28px**, `.h2` tab titles) and `--fs-2` (18→**20px**, `.h3` section/blog headings, and the
+  `.theme-btn` icon) grew; every other `--fs-*` got **smaller**, which only reduces overflow risk.
+  The ≥580px `:root` override is unchanged from `main`, so at every breakpoint ≥580px the type
+  geometry equals `main`.
+- The enlarged headings are safe at 375px: `.h2` tab titles are short single words; `.h3`
+  section/blog titles have no `white-space: nowrap` and simply **wrap** (reflow, not overflow —
+  `.blog-item-title` uses `line-height: 1.3` with no fixed height). The only `nowrap` rules
+  (`.info-content .name`, `.contact-link`) live in the ≥1250px block, where the type tokens equal
+  `main`, so they are unaffected.
+- Radius and shadow changes are representation-only (corner rounding / `box-shadow`) and occupy no
+  layout space, so no reflow or breakpoint-transition regression is possible from them.
+
+### Out-of-ownership observation (flagged, not fixed per §7)
+
+- `.cv-btn { border-radius: 14px; }` (`assets/css/style.css:1401`) is a residual raw literal that
+  escaped radius tokenization; it should become `var(--radius-lg)`. It is a Resume/base (T4-owned)
+  rule outside `#RESPONSIVE`/`#REDUCED MOTION`, so per R2 it is **flagged here for a T4 follow-up,
+  not changed** by this stage.
