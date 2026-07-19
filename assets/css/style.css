@@ -1848,24 +1848,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 @media (min-width: 1024px) {
 
   /**
-   * CUSTOM PROPERTY
-   */
-
-  :root {
-
-    /**
-    * shadow
-    */
-
-    --shadow-1: 0 1px 2px  hsla(0, 0%, 0%, 0.16);
-    --shadow-2: 0 2px 8px  hsla(0, 0%, 0%, 0.18);
-    --shadow-3: 0 4px 16px hsla(0, 0%, 0%, 0.20);
-
-  }
-
-
-
-  /**
    * REUSED STYLE
    */
 
@@ -1975,7 +1957,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   body::-webkit-scrollbar-thumb {
     border: 5px solid var(--smoky-black);
     background: var(--scrollbar-thumb);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     box-shadow: inset 1px 1px 0 var(--scrollbar-inset),
                 inset -1px -1px 0 var(--scrollbar-inset);
   }
