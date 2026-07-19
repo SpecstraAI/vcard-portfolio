@@ -88,7 +88,8 @@
   --status-success-fg:     hsl(120, 40%, 55%);
   --status-success-border: hsla(120, 40%, 45%, 0.3);
   --status-error-bg:       hsla(0, 43%, 51%, 0.15);
-  --status-error-fg:       var(--bittersweet-shimmer);
+  /* AA-tuned: brighter red so error text clears 4.5:1 over the dark tint */
+  --status-error-fg:       hsl(0, 75%, 72%);
   --status-error-border:   hsla(0, 43%, 51%, 0.3);
 
   /* scrollbar */
@@ -198,6 +199,14 @@
   /* orphaned-color tokens */
 
   --surface-navbar: hsla(0, 0%, 88%, 0.85);
+
+  /* form-status — re-tuned for AA over the light contact surface */
+  --status-success-bg:     hsla(120, 40%, 45%, 0.15);
+  --status-success-fg:     hsl(120, 55%, 25%);
+  --status-success-border: hsla(120, 40%, 35%, 0.35);
+  --status-error-bg:       hsla(0, 43%, 51%, 0.15);
+  --status-error-fg:       hsl(0, 60%, 38%);
+  --status-error-border:   hsla(0, 43%, 40%, 0.35);
 
   /* scrollbar */
 
