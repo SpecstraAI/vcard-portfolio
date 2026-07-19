@@ -34,24 +34,24 @@
     hsla(240, 2%, 11%, 0) 100%
   ), hsl(240, 2%, 13%);
   --bg-gradient-yellow-1: linear-gradient(
-    to bottom right, 
-    hsl(45, 100%, 71%) 0%, 
-    hsla(36, 100%, 69%, 0) 50%
+    to bottom right,
+    var(--accent) 0%,
+    hsla(213, 90%, 64%, 0) 50%
   );
   --bg-gradient-yellow-2: linear-gradient(
-    135deg, 
-    hsla(45, 100%, 71%, 0.251) 0%, 
-    hsla(35, 100%, 68%, 0) 59.86%
+    135deg,
+    var(--accent-subtle) 0%,
+    transparent 59.86%
   ), hsl(240, 2%, 13%);
   --border-gradient-onyx: linear-gradient(
-    to bottom right, 
-    hsl(0, 0%, 25%) 0%, 
+    to bottom right,
+    hsl(0, 0%, 25%) 0%,
     hsla(0, 0%, 25%, 0) 50%
   );
   --text-gradient-yellow: linear-gradient(
-    to right, 
-    hsl(45, 100%, 72%), 
-    hsl(35, 100%, 68%)
+    to right,
+    var(--accent-strong),
+    var(--accent)
   );
 
   /* solid */
@@ -65,11 +65,37 @@
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsl(45, 100%, 72%);
-  --vegas-gold: hsl(45, 54%, 58%);
+  --orange-yellow-crayola: var(--accent);
+  --vegas-gold: var(--accent-muted);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
+
+  /* accent */
+
+  --accent:        hsl(213, 90%, 64%);
+  --accent-strong: hsl(213, 90%, 72%);
+  --accent-muted:  hsl(213, 25%, 55%);
+  --accent-subtle: hsla(213, 90%, 64%, 0.14);
+
+  /* orphaned-color tokens — mirror current literals for later section children */
+
+  --surface-navbar: hsla(240, 1%, 17%, 0.75);
+  --overlay:        hsl(0, 0%, 5%);
+  --overlay-scrim:  hsla(0, 0%, 0%, 0.5);
+
+  --status-success-bg:     hsla(120, 40%, 45%, 0.15);
+  --status-success-fg:     hsl(120, 40%, 55%);
+  --status-success-border: hsla(120, 40%, 45%, 0.3);
+  --status-error-bg:       hsla(0, 43%, 51%, 0.15);
+  --status-error-fg:       var(--bittersweet-shimmer);
+  --status-error-border:   hsla(0, 43%, 51%, 0.3);
+
+  /* scrollbar */
+
+  --scrollbar-thumb:       hsla(0, 0%, 100%, 0.1);
+  --scrollbar-thumb-hover: hsla(0, 0%, 100%, 0.15);
+  --scrollbar-inset:       hsla(0, 0%, 100%, 0.11);
 
   /**
    * typography
@@ -79,13 +105,13 @@
   --ff-poppins: 'Poppins', sans-serif;
 
   /* font-size */
-  --fs-1: 24px;
-  --fs-2: 18px;
-  --fs-3: 17px;
-  --fs-4: 16px;
-  --fs-5: 15px;
-  --fs-6: 14px;
-  --fs-7: 13px;
+  --fs-1: 28px;
+  --fs-2: 20px;
+  --fs-3: 16px;
+  --fs-4: 15px;
+  --fs-5: 14px;
+  --fs-6: 13px;
+  --fs-7: 12px;
   --fs-8: 11px;
 
   /* font-weight */
@@ -95,14 +121,24 @@
   --fw-600: 600;
 
   /**
+   * radius
+   */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /**
    * shadow
    */
-  
-  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
-  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
-  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
-  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
-  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+
+  --shadow-1: 0 1px 2px  hsla(0, 0%, 0%, 0.16);
+  --shadow-2: 0 2px 8px  hsla(0, 0%, 0%, 0.18);
+  --shadow-3: 0 4px 16px hsla(0, 0%, 0%, 0.20);
+  --shadow-4: 0 8px 24px hsla(0, 0%, 0%, 0.14);
+  --shadow-5: 0 12px 32px hsla(0, 0%, 0%, 0.18);
 
   /**
    * transition
@@ -127,25 +163,15 @@
     hsla(0, 0%, 88%, 0.5) 0%,
     hsla(0, 0%, 82%, 0) 100%
   ), hsl(0, 0%, 91%);
-  --bg-gradient-yellow-1: linear-gradient(
-    to bottom right,
-    hsl(40, 90%, 50%) 0%,
-    hsla(36, 90%, 48%, 0) 50%
-  );
   --bg-gradient-yellow-2: linear-gradient(
     135deg,
-    hsla(40, 90%, 50%, 0.25) 0%,
-    hsla(35, 90%, 48%, 0) 59.86%
+    var(--accent-subtle) 0%,
+    transparent 59.86%
   ), hsl(0, 0%, 91%);
   --border-gradient-onyx: linear-gradient(
     to bottom right,
     hsl(0, 0%, 70%) 0%,
     hsla(0, 0%, 70%, 0) 50%
-  );
-  --text-gradient-yellow: linear-gradient(
-    to right,
-    hsl(40, 90%, 40%),
-    hsl(35, 90%, 35%)
   );
 
   /* solid */
@@ -158,19 +184,34 @@
   --smoky-black: hsl(0, 0%, 96%);
   --white-1: hsl(0, 0%, 15%);
   --white-2: hsl(0, 0%, 20%);
-  --orange-yellow-crayola: hsl(40, 90%, 38%);
-  --vegas-gold: hsl(40, 60%, 35%);
   --light-gray: hsl(0, 0%, 30%);
   --light-gray-70: hsl(0, 0%, 40%);
   --bittersweet-shimmer: hsl(0, 43%, 40%);
 
+  /* accent */
+
+  --accent:        hsl(213, 85%, 42%);
+  --accent-strong: hsl(213, 85%, 34%);
+  --accent-muted:  hsl(213, 30%, 40%);
+  --accent-subtle: hsla(213, 85%, 42%, 0.10);
+
+  /* orphaned-color tokens */
+
+  --surface-navbar: hsla(0, 0%, 88%, 0.85);
+
+  /* scrollbar */
+
+  --scrollbar-thumb:       hsla(0, 0%, 0%, 0.15);
+  --scrollbar-thumb-hover: hsla(0, 0%, 0%, 0.25);
+  --scrollbar-inset:       hsla(0, 0%, 0%, 0.11);
+
   /* shadow */
 
-  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.1);
-  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.1);
-  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.1);
-  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.08);
-  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.1);
+  --shadow-1: 0 1px 2px  hsla(0, 0%, 0%, 0.06);
+  --shadow-2: 0 2px 8px  hsla(0, 0%, 0%, 0.07);
+  --shadow-3: 0 4px 16px hsla(0, 0%, 0%, 0.08);
+  --shadow-4: 0 8px 24px hsla(0, 0%, 0%, 0.05);
+  --shadow-5: 0 12px 32px hsla(0, 0%, 0%, 0.07);
 
 }
 
@@ -232,7 +273,7 @@ body { background: var(--smoky-black); }
 article {
   background: var(--eerie-black-2);
   border: 1px solid var(--jet);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 15px;
   box-shadow: var(--shadow-1);
   z-index: 1;
@@ -250,7 +291,7 @@ article {
   background: var(--border-gradient-onyx);
   width: 30px;
   height: 30px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -324,7 +365,7 @@ article.active {
   width: 30px;
   height: 3px;
   background: var(--text-gradient-yellow);
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
 }
 
 .has-scrollbar::-webkit-scrollbar {
@@ -334,12 +375,12 @@ article.active {
 
 .has-scrollbar::-webkit-scrollbar-track {
   background: var(--onyx);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
 }
 
 .has-scrollbar::-webkit-scrollbar-thumb {
   background: var(--orange-yellow-crayola);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
 }
 
 .has-scrollbar::-webkit-scrollbar-button { width: 20px; }
@@ -349,7 +390,7 @@ article.active {
   background: var(--border-gradient-onyx);
   padding: 15px;
   padding-top: 45px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-2);
   cursor: pointer;
   z-index: 1;
@@ -1816,9 +1857,9 @@ textarea.form-input::-webkit-resizer { display: none; }
     * shadow
     */
 
-    --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.125);
-    --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.125);
-    --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.125);
+    --shadow-1: 0 1px 2px  hsla(0, 0%, 0%, 0.16);
+    --shadow-2: 0 2px 8px  hsla(0, 0%, 0%, 0.18);
+    --shadow-3: 0 4px 16px hsla(0, 0%, 0%, 0.20);
 
   }
 
@@ -1933,13 +1974,13 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   body::-webkit-scrollbar-thumb {
     border: 5px solid var(--smoky-black);
-    background: hsla(0, 0%, 100%, 0.1);
+    background: var(--scrollbar-thumb);
     border-radius: 20px;
-    box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11),
-                inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
+    box-shadow: inset 1px 1px 0 var(--scrollbar-inset),
+                inset -1px -1px 0 var(--scrollbar-inset);
   }
 
-  body::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 100%, 0.15); }
+  body::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
   body::-webkit-scrollbar-button { height: 60px; }
 
@@ -2041,12 +2082,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 @media (min-width: 1250px) {
 
   [data-theme="light"] body::-webkit-scrollbar-thumb {
-    background: hsla(0, 0%, 0%, 0.15);
-    box-shadow: inset 1px 1px 0 hsla(0, 0%, 0%, 0.11),
-                inset -1px -1px 0 hsla(0, 0%, 0%, 0.11);
+    background: var(--scrollbar-thumb);
+    box-shadow: inset 1px 1px 0 var(--scrollbar-inset),
+                inset -1px -1px 0 var(--scrollbar-inset);
   }
 
-  [data-theme="light"] body::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 0%, 0.25); }
+  [data-theme="light"] body::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
 }
 
