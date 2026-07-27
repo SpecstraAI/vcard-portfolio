@@ -1,0 +1,13 @@
+name: Orchestra GitHub App E2E Failure
+
+on:
+    workflow_dispatch:
+
+jobs:
+    intentional-failure:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Fail intentionally
+          run: |
+            echo "Intentional failure for GitHub App rerun testing"
+            exit 1
