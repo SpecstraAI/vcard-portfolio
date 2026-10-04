@@ -76,7 +76,7 @@
    */
 
   /* font-family */
-  --ff-poppins: 'Poppins', sans-serif;
+  --ff-manrope: 'Manrope', Helvetica, Arial, sans-serif;
 
   /* font-size */
   --fs-1: 24px;
@@ -216,7 +216,7 @@ input, textarea {
 
 :focus { outline-color: var(--orange-yellow-crayola); }
 
-html { font-family: var(--ff-poppins); }
+html { font-family: var(--ff-manrope); }
 
 body { background: var(--smoky-black); }
 
@@ -272,7 +272,7 @@ article {
 svg.icon { width: 1em; height: 1em; }
 svg.icon [stroke] { stroke-width: var(--icon-stroke-width, 32); }
 
-.theme-icon--moon { display: none; }
+svg.icon.theme-icon--moon { display: none; }
 :root[data-theme="light"] .theme-icon--sun  { display: none; }
 :root[data-theme="light"] .theme-icon--moon { display: block; }
 
