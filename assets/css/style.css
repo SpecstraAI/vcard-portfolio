@@ -76,7 +76,7 @@
    */
 
   /* font-family */
-  --ff-helvetica: Helvetica, Arial, sans-serif;
+  --ff-manrope: 'Manrope', Helvetica, Arial, sans-serif;
 
   /* font-size */
   --fs-1: 24px;
@@ -216,7 +216,7 @@ input, textarea {
 
 :focus { outline-color: var(--orange-yellow-crayola); }
 
-html { font-family: var(--ff-helvetica); }
+html { font-family: var(--ff-manrope); }
 
 body { background: var(--smoky-black); }
 
