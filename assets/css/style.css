@@ -76,7 +76,7 @@
    */
 
   /* font-family */
-  --ff-poppins: 'Poppins', sans-serif;
+  --ff-helvetica: Helvetica, Arial, sans-serif;
 
   /* font-size */
   --fs-1: 24px;
@@ -216,7 +216,7 @@ input, textarea {
 
 :focus { outline-color: var(--orange-yellow-crayola); }
 
-html { font-family: var(--ff-poppins); }
+html { font-family: var(--ff-helvetica); }
 
 body { background: var(--smoky-black); }
 
