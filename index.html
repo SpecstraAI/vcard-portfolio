@@ -41,6 +41,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/resume-print.css" media="print">
 
   <!--
     - google font link
@@ -176,10 +177,10 @@
 
         </ul>
 
-        <a href="assets/cv.pdf" download class="cv-btn">
+        <button type="button" class="cv-btn" data-resume-export>
           <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M336 176h40a40 40 0 0140 40v208a40 40 0 01-40 40H136a40 40 0 01-40-40V216a40 40 0 0140-40h40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M176 272l80 80 80-80M256 48v288"/></svg>
-          <span>Download CV</span>
-        </a>
+          <span>Export Resume (PDF)</span>
+        </button>
 
         <div class="separator"></div>
 
@@ -237,7 +238,7 @@
           </li>
 
           <li class="navbar-item">
-            <button class="theme-btn" data-theme-btn aria-label="Toggle light/dark theme">
+            <button type="button" class="theme-btn" data-theme-btn aria-label="Switch to light mode">
               <svg class="icon theme-icon theme-icon--sun" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" d="M256 48v48M256 416v48M403.08 108.92l-33.94 33.94M142.86 369.14l-33.94 33.94M464 256h-48M96 256H48M403.08 403.08l-33.94-33.94M142.86 142.86l-33.94-33.94"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"/></svg>
               <svg class="icon theme-icon theme-icon--moon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160 136c0-30.62 4.51-61.61 16-88C99.57 81.27 48 159.32 48 248c0 119.29 96.71 216 216 216 88.68 0 166.73-51.57 200-128-26.39 11.49-57.38 16-88 16-119.29 0-216-96.71-216-216z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -557,6 +558,8 @@
 
         <header>
           <h2 class="h2 article-title">Resume</h2>
+          <button type="button" class="cv-btn" data-resume-export>Export Resume (PDF)</button>
+          <p class="resume-export-hint">Choose “Save as PDF” in the print dialog to download your resume.</p>
         </header>
 
         <section class="timeline">
@@ -1285,6 +1288,7 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/resume-export.js"></script>
 
 
 

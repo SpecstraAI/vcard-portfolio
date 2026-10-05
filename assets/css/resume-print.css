@@ -1,0 +1,74 @@
+/* Loaded only for printing; use the live resume as the single source of truth. */
+@page { margin: 15mm; }
+
+*, *::before, *::after {
+  color: #000 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+body { background: #fff !important; }
+
+main, .main-content, .sidebar, article.resume {
+  display: block !important;
+  position: static !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+article:not(.resume), .navbar, button, .resume-export-hint,
+.avatar-box, .social-list, .separator, .icon-box,
+.skill-progress-bg, .contact-title {
+  display: none !important;
+}
+
+.sidebar-info, .sidebar-info_more {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.info-content .name, .info-content .title {
+  text-align: left !important;
+  white-space: normal !important;
+  margin: 0 0 6pt !important;
+  padding: 0 !important;
+}
+
+.contacts-list {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 6pt 14pt !important;
+  margin: 10pt 0 18pt;
+}
+
+.contact-info { width: auto !important; max-width: none !important; }
+.contact-info .contact-link { white-space: normal !important; }
+.contact-info time { display: none !important; }
+.contact-info :is(a, address) { font-size: 10pt !important; }
+
+.resume .article-title { margin-bottom: 16pt; }
+.article-title::after, .timeline-item::before,
+.timeline-item::after, .content-card::before { display: none !important; }
+
+.timeline { margin-bottom: 18pt; }
+.timeline .title-wrapper { margin-bottom: 10pt; }
+.timeline-list { margin-left: 0; }
+.timeline-item, .skills-item { break-inside: avoid; }
+.timeline-item-title, .timeline-text, .timeline-list span { font-size: 10pt; }
+.resume h3 { font-size: 14pt; break-after: avoid; }
+.skills-list { padding: 0; border: 0; }
+.skills-item:not(:last-child) { margin-bottom: 8pt; }

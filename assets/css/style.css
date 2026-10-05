@@ -272,7 +272,7 @@ article {
 svg.icon { width: 1em; height: 1em; }
 svg.icon [stroke] { stroke-width: var(--icon-stroke-width, 32); }
 
-.theme-icon--moon { display: none; }
+.theme-btn .theme-icon--moon { display: none; }
 :root[data-theme="light"] .theme-icon--sun  { display: none; }
 :root[data-theme="light"] .theme-icon--moon { display: block; }
 
@@ -1375,6 +1375,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 .cv-btn:hover { background: var(--bg-gradient-yellow-1); }
 
 .cv-btn:hover::before { background: var(--bg-gradient-yellow-2); }
+
+.resume-export-hint {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  margin-bottom: 24px;
+}
 
 
 
