@@ -56,7 +56,7 @@ The old `assets/cv.pdf` was an empty placeholder and is no longer linked.
 Feature regression tests (Node.js required):
 
 ```bash
-node --test tests/resume-export.test.cjs
+node --test tests/*.test.cjs
 ```
 
 ## Deployment
