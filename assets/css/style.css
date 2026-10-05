@@ -1376,6 +1376,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .cv-btn:hover::before { background: var(--bg-gradient-yellow-2); }
 
+.resume-export-hint {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  margin-bottom: 24px;
+}
+
 
 
 

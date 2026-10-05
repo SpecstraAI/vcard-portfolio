@@ -41,6 +41,24 @@ python3 -m http.server 8000
 
 Then visit <http://localhost:8000/>.
 
+## Resume export
+
+Click **Export Resume (PDF)** on the Resume tab or in the sidebar (expand
+**Show Contacts** on smaller screens), then choose **Save as PDF** in your
+browser's print dialog. The print layout includes the profile, contact details,
+education, experience, and skills from the page, excluding other tabs and site
+controls. It works in either theme and does not change the selected tab.
+Canceling the dialog leaves the page unchanged. No backend or PDF library is
+required; PDF saving depends on the browser's native print options.
+
+The old `assets/cv.pdf` was an empty placeholder and is no longer linked.
+
+Feature regression tests (Node.js required):
+
+```bash
+node --test tests/resume-export.test.cjs
+```
+
 ## Deployment
 
 The site is deployed as a GitHub Pages project site at
