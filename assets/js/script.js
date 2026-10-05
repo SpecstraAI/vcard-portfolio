@@ -222,6 +222,12 @@ form.addEventListener("submit", function (event) {
 // theme toggle
 const themeBtn = document.querySelector("[data-theme-btn]");
 
+const updateThemeButton = function () {
+  var label = document.documentElement.dataset.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+  themeBtn.setAttribute('aria-label', label);
+  themeBtn.setAttribute('title', label);
+};
+
 const applyTheme = function (theme) {
   if (theme === 'light') {
     document.documentElement.dataset.theme = 'light';
@@ -229,7 +235,10 @@ const applyTheme = function (theme) {
     delete document.documentElement.dataset.theme;
   }
   localStorage.setItem('theme', theme);
+  updateThemeButton();
 };
+
+updateThemeButton();
 
 themeBtn.addEventListener('click', function () {
   var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
